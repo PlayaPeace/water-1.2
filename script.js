@@ -13,8 +13,8 @@ let lInput;
 let hIlInput;
 let hGInput;
 let dInput;
-let numResidents1;
-let numDevices1;
+// let numResidents1;
+// let numDevices1;
 
 let h1;
 let h2;
@@ -132,28 +132,28 @@ for (let elem = 0; elem < inputs.length; elem++){
                 if (element) element.textContent = dInput;
             }
 
-            if (this.hasAttribute('data-numResidents1-input')) {
-                numResidents1 = this.value;
-                allValue('[data-numResidents1-input]', numResidents1);
-            }
+            // if (this.hasAttribute('data-numResidents1-input')) {
+            //     numResidents1 = this.value;
+            //     allValue('[data-numResidents1-input]', numResidents1);
+            // }
+            //
+            // if (this.hasAttribute('data-numDevices1-input')) {
+            //     numDevices1 = this.value;
+            //     allValue('[data-numDevices1-input]', numDevices1);
+            // }
 
-            if (this.hasAttribute('data-numDevices1-input')) {
-                numDevices1 = this.value;
-                allValue('[data-numDevices1-input]', numDevices1);
-            }
-
-            if (numResidents1 && numDevices1 && Nb0) {
-                let p = 5.1*numResidents1/0.2/3600/Nb0;
-                p = Number(p.toFixed(3));
-                qSMax1 = Number((findAlphaByNP(p * Nb0)).toFixed(4));
-
-                let result = findDQS(Number(qSMax1));
-                let resultText = result.s + " * " + qSMax1 + "² = " + Number((Number(qSMax1)**2 * result.s).toFixed(2));
-                h1 = Number((Number(qSMax1)**2 * result.s).toFixed(2));
-                const text = document.getElementById('h-text');
-                if (text) text.textContent = resultText;
-
-            }
+            // if (numResidents1 && numDevices1 && Nb0) {
+            //     let p = 5.1*numResidents1/0.2/3600/Nb0;
+            //     p = Number(p.toFixed(3));
+            //     qSMax1 = Number((findAlphaByNP(p * Nb0)).toFixed(4));
+            //
+            //     let result = findDQS(Number(qSMax1));
+            //     let resultText = result.s + " * " + qSMax1 + "² = " + Number((Number(qSMax1)**2 * result.s).toFixed(2));
+            //     h1 = Number((Number(qSMax1)**2 * result.s).toFixed(2));
+            //     const text = document.getElementById('h-text');
+            //     if (text) text.textContent = resultText;
+            //
+            // }
 
             if (numFloors) {
                 Htr = 10+4*(numFloors-1);
@@ -201,6 +201,12 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaQB0mh';
                 canvasCont='canvasQB0mh';
                 calculate(formulaQB0mhText, hiddenFormulaCont,formulaCont,canvasCont);
+
+                let formulaQb0Text = `q^{\\text{b0}}_{\\text{сут}} = \\frac{q^{\\text{B0}}_{\\text{сут}} * U}{1000} = \\frac{${180} * ${U}}{1000} = ${qb0} \\frac{\\text{м³}}{\\text{сут}}`;
+                hiddenFormulaCont = 'hiddenFormulaQb0';
+                formulaCont='formulaQb0';
+                canvasCont='canvasQb0';
+                calculate(formulaQb0Text, hiddenFormulaCont,formulaCont,canvasCont);
 
                 // let element = document.getElementById('d-text2');
                 // if (element) element.textContent = result.d;
@@ -556,12 +562,6 @@ for (let elem = 0; elem < inputs.length; elem++){
         }
     });
 }
-
-let formulaQb0Text = `q^{\\text{b0}}_{\\text{сут}} = \\frac{q^{\\text{B0}}_{\\text{сут}} * U}{1000} = \\frac{${180} * ${U}}{1000} = ${qb0} \\frac{\\text{м³}}{\\text{сут}}`;
-hiddenFormulaCont = 'hiddenFormulaQb0';
-formulaCont='formulaQb0';
-canvasCont='canvasQb0';
-calculate(formulaQb0Text, hiddenFormulaCont,formulaCont,canvasCont);
 
 let formulaQdB0Text = `q_{\\text{сут}}^{\\text{B0}} = 180 \\frac{\\text{л}}{\\text{сут}}`;
 hiddenFormulaCont = 'hiddenFormulaQdB0';
