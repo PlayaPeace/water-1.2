@@ -7,14 +7,15 @@ let floorHeight;
 let population;
 let numDevices;
 let numApartments;
-// let qDB0Input;
-// let qDB1Input;
 let lInput;
 let hIlInput;
 let hGInput;
 let dInput;
-// let numResidents1;
-// let numDevices1;
+//new part 25.11
+let h2Input;
+//new part 30.11
+let nInput;
+
 
 let h1;
 let h2;
@@ -62,16 +63,28 @@ for (let elem = 0; elem < inputs.length; elem++){
             if (this.hasAttribute('data-num-buildings')) {
                 numBuildings = this.value;
                 allValue('[data-num-buildings]', numBuildings);
+
+                //30.11 add
+                let element = document.getElementById('data-num-buildings');
+                if (element) element.textContent = numBuildings;
             }
 
             if (this.hasAttribute('data-num-sections')) {
                 numSections = this.value;
                 allValue('[data-num-sections]', numSections);
+
+                //30.11 add
+                let element = document.getElementById('data-num-sections');
+                if (element) element.textContent = numSections;
             }
 
             if (this.hasAttribute('data-num-floors')) {
                 numFloors = this.value;
                 allValue('[data-num-floors]', numFloors);
+
+                //30.11 add
+                let element = document.getElementById('data-num-floors');
+                if (element) element.textContent = numFloors;
             }
 
             if (this.hasAttribute('data-floor-height')) {
@@ -82,6 +95,10 @@ for (let elem = 0; elem < inputs.length; elem++){
             if (this.hasAttribute('data-population')) {
                 population = this.value;
                 allValue('[data-population]', population);
+
+                //30.11 add
+                let element = document.getElementById('data-population');
+                if (element) element.textContent = population;
             }
 
             if (this.hasAttribute('data-num-devices')) {
@@ -92,13 +109,11 @@ for (let elem = 0; elem < inputs.length; elem++){
             if (this.hasAttribute('data-num-apartments')) {
                 numApartments = this.value;
                 allValue('[data-num-apartments]', numApartments);
-            }
 
-            // if (this.hasAttribute('data-qDB0-input')) {
-            //     qDB0Input = this.value;
-            //     qDB1Input = Number(qDB0Input) - 70;
-            //     allValue('[data-qDB0-input]', qDB0Input);
-            // }
+                //30.11 add
+                let element = document.getElementById('data-num-apartments');
+                if (element) element.textContent = numApartments;
+            }
 
             if (this.hasAttribute('data-l-input')) {
                 lInput = this.value;
@@ -132,28 +147,35 @@ for (let elem = 0; elem < inputs.length; elem++){
                 if (element) element.textContent = dInput;
             }
 
-            // if (this.hasAttribute('data-numResidents1-input')) {
-            //     numResidents1 = this.value;
-            //     allValue('[data-numResidents1-input]', numResidents1);
-            // }
-            //
-            // if (this.hasAttribute('data-numDevices1-input')) {
-            //     numDevices1 = this.value;
-            //     allValue('[data-numDevices1-input]', numDevices1);
-            // }
+            //new part 30.11
+            if (this.hasAttribute('data-n-input')) {
+                nInput = this.value;
+                allValue('[data-n-input]', nInput);
 
-            // if (numResidents1 && numDevices1 && Nb0) {
-            //     let p = 5.1*numResidents1/0.2/3600/Nb0;
-            //     p = Number(p.toFixed(3));
-            //     qSMax1 = Number((findAlphaByNP(p * Nb0)).toFixed(4));
-            //
-            //     let result = findDQS(Number(qSMax1));
-            //     let resultText = result.s + " * " + qSMax1 + "² = " + Number((Number(qSMax1)**2 * result.s).toFixed(2));
-            //     h1 = Number((Number(qSMax1)**2 * result.s).toFixed(2));
-            //     const text = document.getElementById('h-text');
-            //     if (text) text.textContent = resultText;
-            //
-            // }
+                let text = document.getElementById('n-input-table2');
+                if (text) text.textContent = nInput;
+            }
+
+            //new part 25.11
+            if (this.hasAttribute('data-h2-input')) {
+                h2Input = this.value;
+                allValue('[data-h2-input]', h2Input);
+
+                let text = document.getElementById('h2-1');
+                if (text) text.textContent = h2Input;
+
+                text = document.getElementById('h2-2');
+                if (text) text.textContent = h2Input;
+            }
+
+            //new part 25.11
+            if (h2Input) {
+                let h1 = h2Input - 0.3;
+                h1 = Number(h1.toFixed(3));
+
+                let text = document.getElementById('h1');
+                if (text) text.textContent = h1;
+            }
 
             if (numFloors) {
                 Htr = 10+4*(numFloors-1);
@@ -208,11 +230,6 @@ for (let elem = 0; elem < inputs.length; elem++){
                 canvasCont='canvasQb0';
                 calculate(formulaQb0Text, hiddenFormulaCont,formulaCont,canvasCont);
 
-                // let element = document.getElementById('d-text2');
-                // if (element) element.textContent = result.d;
-                // element = document.getElementById('d-text3');
-                // if (element) element.textContent = result.d;
-
                 const Qb0mhTableElement = document.getElementById('Qb0mh-table');
                 if (Qb0mhTableElement) Qb0mhTableElement.textContent = qB0mh.toString();
                 allValue('Qb0mh-table', qB0mh);
@@ -266,6 +283,10 @@ for (let elem = 0; elem < inputs.length; elem++){
                 let Pb0Calculate = "(11.6 * " + U + `)/(3600*${Nb0}*0.3) = ` + Psb0;
                 allValue('[Pb0-calculate]', Pb0Calculate);
 
+                //new part 30.11
+                let text = document.getElementById('pSB0-table2');
+                if (text) text.textContent = Psb0;
+
                 let formulaPB0sText = `\\text{1)} P_{\\text{сек}}^{\\text{BO}} = \\frac{11.6 * ${U}}{3600*${Nb0}*0.3} = ${Psb0}`;
                 hiddenFormulaCont = 'hiddenFormulaPB0s';
                 formulaCont='formulaPB0s';
@@ -296,6 +317,19 @@ for (let elem = 0; elem < inputs.length; elem++){
                 formulaCont='formulaA1NP';
                 canvasCont='canvasA1NP';
                 calculate(formulaA1NPText, hiddenFormulaCont,formulaCont,canvasCont);
+
+                //new part 25.11
+                let text = document.getElementById('P-s-B0-1');
+                if (text) text.textContent = Psb0;
+
+                text = document.getElementById('P-s-B0-2');
+                if (text) text.textContent = Psb0;
+
+                text = document.getElementById('N-B0');
+                if (text) text.textContent = Nb0;
+
+                text = document.getElementById('NP');
+                if (text) text.textContent = NP1;
             }
 
             if (NP1) {
@@ -377,21 +411,28 @@ for (let elem = 0; elem < inputs.length; elem++){
 
                     text = document.getElementById('v-text');
                     if (text) text.textContent = Number(result.v.toFixed(3));
+
+                    //new part 25.11
+                    text = document.getElementById('a-1');
+                    if (text) text.textContent = a;
+
+                    text = document.getElementById('a-2');
+                    if (text) text.textContent = a;
+
+                    let qTot = 5 * 0.3 * a;
+                    qTot = Number(qTot.toFixed(2));
+
+                    text = document.getElementById('q-tot-1');
+                    if (text) text.textContent = qTot;
+
+                    text = document.getElementById('q-tot-2');
+                    if (text) text.textContent = qTot;
+
+                    let qS = Number(qTot) + 1.6;
+                    qS = Number(qS.toFixed(2));
+                    text = document.getElementById('q-s');
+                    if (text) text.textContent = qS;
                 }
-
-                //
-                // let iText = document.getElementById('i-text');
-                // if (iText) iText.textContent = result.i;
-
-                // if (result.i && lInput) {
-                //     let hvv = Number(result.i) * Number(lInput);
-                //     hvv = Number(hvv.toFixed(3));
-                //     let formulaText = `\\text{h}_\\text{вв} = ${Number(result.i).toFixed(5)} * ${lInput} = ${hvv} \\text{ м}`;
-                //     hiddenFormulaCont = 'hiddenFormulaHvv';
-                //     formulaCont='formulaHvv';
-                //     canvasCont='canvasHvv';
-                //     calculate(formulaText, hiddenFormulaCont,formulaCont,canvasCont);
-                // }
             }
 
             if (Nb1 && Psb1) {
@@ -559,9 +600,36 @@ for (let elem = 0; elem < inputs.length; elem++){
                 element = document.getElementById('h-p-text');
                 if (element) element.textContent = hP;
             }
+
+            if (nInput && Psb0) {
+                let np = Number((nInput * Psb0).toFixed(3));
+                let text = document.getElementById('np-table2');
+                if (text) text.textContent = np;
+
+                let a = findAlphaByNP(np);
+                a = Number(a.toFixed(3))
+                text = document.getElementById('a-table2');
+                if (text) text.textContent = a;
+
+                let qSB0 = Number((5 * 0.3 * a).toFixed(3));
+                text = document.getElementById('qSB0-table2');
+                if (text) text.textContent = qSB0;
+
+                let qSK1 = Number((1.6 + qSB0).toFixed(3));
+                text = document.getElementById('qSK1-table2');
+                if (text) text.textContent = qSK1;
+            }
         }
     });
 }
+
+//new part 25.11
+let formulaText = `q^{\\text{sl}} = \\frac{q^{\\text{tot}}_{\\text{hr}}}{3.6} + k_s q^s_0, л/c.`;
+hiddenFormulaCont = 'hiddenFormulaQsl';
+formulaCont='formulaQsl';
+canvasCont='canvasQsl';
+calculate(formulaText, hiddenFormulaCont,formulaCont,canvasCont);
+//
 
 let formulaQdB0Text = `q_{\\text{сут}}^{\\text{B0}} = 180 \\frac{\\text{л}}{\\text{сут}}`;
 hiddenFormulaCont = 'hiddenFormulaQdB0';
